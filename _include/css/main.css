@@ -13,6 +13,7 @@ html {
     font-size: 1em;
     line-height: 1.4;
     text-rendering: optimizeLegibility;
+    height: 100%;
 }
 
 body {
@@ -42,17 +43,91 @@ body {
    Medium Dark : #ffffff
    Dark : #ffffff
    ========================================================================== */
-/* ---------------------------------------
-   Home Page.
-   --------------------------------------- */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+    justify-content: center;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
 
-/* ---------------------------------------
-   ??? Page.
-   --------------------------------------- */
+.quote-box {
+    display: flex;
+    flex-direction: column;
+    border: 10px solid red;
+    width: 700px;
+    padding: 1em 4.5%;
+    margin-bottom: 1.5%;
+}
 
-/* ---------------------------------------
-   ??? Page.
-   --------------------------------------- */
+.quote-box__quote {
+    align-self: flex-start;
+    font-size: 2.125em;
+    min-height: 75px;
+    padding: 0 3%;
+}
+
+.quote-box__author {
+    align-self: flex-end;
+    font-size: 1.525em;
+    margin: .375em 0 2.125em;
+}
+
+.button-group {
+    display: flex;
+}
+
+.button-group__twitter {
+    margin-right: 1.5%;
+    cursor: pointer;
+    height: 41px;
+    width: 41px;
+}
+
+.button-group__twitter:hover path {
+    transition: .45s;
+    fill: green;
+}
+
+.button-group__tumblr {
+    margin-right: 1.5%;
+    cursor: pointer;
+    height: 41px;
+    width: 41px;
+}
+
+.button-group__tumblr:hover path {
+    transition: .45s;
+    fill: green;
+}
+
+.button-group__google {
+    margin-right: auto;
+    cursor: pointer;
+    height: 41px;
+    width: 41px;
+}
+
+.button-group__google:hover path {
+    transition: .45s;
+    fill: green;
+}
+
+.button-group__new-quote {
+    margin-left: auto;
+    background-color: lightblue;
+    border: 1px solid blue;
+    cursor: pointer;
+    padding: 12px 16px;
+    transition: .45s;
+
+}
+
+.button-group__new-quote:hover {
+    background-color: white;
+}
 
 /* ==========================================================================
    HELPER CLASSES

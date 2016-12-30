@@ -1,0 +1,31 @@
+{
+  "name": "randomquotemachine",
+  "version": "1.0.0",
+  "description": "random quote generator fcc project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarrisJT/RandomQuoteMachine.git"
+  },
+  "keywords": [
+    "random",
+    "quote",
+    "generator",
+    "machine"
+  ],
+  "author": "Harris J Thompson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HarrisJT/RandomQuoteMachine/issues"
+  },
+  "homepage": "https://github.com/HarrisJT/RandomQuoteMachine#readme",
+  "devDependencies": {
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-csscomb": "^3.0.8",
+    "gulp-mocha": "^3.0.1"
+  }
+}
