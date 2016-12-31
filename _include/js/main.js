@@ -1,11 +1,7 @@
 let currentQuote = 'A people that values its privileges above its principles soon loses both.';
 let currentAuthor = 'Dwight D. Eisenhower';
-const quoteElement = document.querySelector('.quote-box__quote');
-const authorElement = document.querySelector('.quote-box__author');
-const newQuoteElement = document.querySelector('.button-group__new-quote');
-const twitterElement = document.querySelector('.button-group__twitter');
-const tumblrElement = document.querySelector('.button-group__tumblr');
-const googleElement = document.querySelector('.button-group__google');
+const quoteElement = document.querySelector('.quote-group__quote');
+const authorElement = document.querySelector('.quote-group__author');
 
 function inIframe() {
   try {
@@ -21,11 +17,14 @@ function openURL(url, width, height) {
 
 function getQuote() {
   const request = new XMLHttpRequest();
-  request.open('GET', 'https://andruxnet-random-famous-quotes.p.mashape.com/cat=', true);
-  request.setRequestHeader('X-Mashape-Key', 'OivH71yd3tmshl9YKzFH7BTzBVRQp1RaKLajsnafgL2aPsfP9V');
+  request.open('GET', 'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=', true);
+  request.setRequestHeader('X-Mashape-Key', '2goMqE557YmshrBAZx9tiX6vq5I6p1IXclEjsn6Efgp5xQ37BQ');
+  request.setRequestHeader('Accept', 'application/json');
   request.onload = function () {
     if (this.status >= 200 && this.status < 400) {
       const resp = JSON.parse(this.response);
+      quoteElement.classList.remove('quote-active');
+      authorElement.classList.remove('quote-active');
       currentQuote = resp.quote;
       currentAuthor = resp.author;
       quoteElement.textContent = `${currentQuote}`;
@@ -33,40 +32,58 @@ function getQuote() {
     } else {
       quoteElement.textContent = `${currentQuote}`;
       authorElement.textContent = `-${currentAuthor}`;
+      quoteElement.classList.remove('quote-active');
+      authorElement.classList.remove('quote-active');
     }
   };
 
   request.onerror = function () {
-    quoteElement.textContent = `${currentQuote}`;
-    authorElement.textContent = `-${currentAuthor}`;
+    quoteElement.textContent = `Error with Request}`;
+    authorElement.textContent = `-developer`;
+    quoteElement.classList.remove('quote-active');
+    authorElement.classList.remove('quote-active');
   };
+
+  setTimeout(function () {
+    quoteElement.classList.add('quote-active');
+    authorElement.classList.add('quote-active');
+  }, 500);
 
   request.send();
 }
 
-newQuoteElement.addEventListener('click', getQuote);
+window.onload = function () {
+  getQuote();
+  document.body.keypress = function (e) {
+    let eventObject = window.event ? event : e;
+    let keyCode = eventObject.charCode ? eventObject.charCode : eventObject.keyCode;
+    if (keyCode === 0 || keyCode === 32) {
+      e.preventDefault();
+      getQuote();
+    }
+  };
 
-document.body.onkeyup = function (e) {
-  if (e.keyCode == 32) {
-    getQuote();
-  }
+  document.querySelector('.button-group__new-quote').addEventListener('click', getQuote);
+
+  document.querySelector('.button-group__twitter').addEventListener('click', function () {
+    if (!inIframe()) {
+      openURL('https://twitter.com/intent/tweet?hashtags=quotes&text='
+          + encodeURIComponent('"' + currentQuote + '" -' + currentAuthor), 640, 300);
+    }
+  });
+
+  document.querySelector('.button-group__tumblr').addEventListener('click', function () {
+    if (!inIframe()) {
+      openURL('https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes&caption='
+          + encodeURIComponent(currentAuthor) + '&content=' + encodeURIComponent(currentQuote)
+          + '&canonicalUrl=' + encodeURIComponent(window.location.href), 640, 600);
+    }
+  });
+
+  document.querySelector('.button-group__google').addEventListener('click', function () {
+    if (!inIframe()) {
+      openURL('https://www.google.com/#q=' + encodeURIComponent(currentQuote), 1000, 800);
+    }
+  });
 };
 
-twitterElement.addEventListener('click', function () {
-  if (!inIframe()) {
-    openURL('https://twitter.com/intent/tweet?hashtags=quotes&text='
-        + encodeURIComponent('"' + currentQuote + '" ' + currentAuthor), 640, 300);
-  }
-});
-
-tumblrElement.addEventListener('click', function () {
-  if (!inIframe()) {
-    openURL('https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes&caption=' + encodeURIComponent(currentAuthor) + '&content=' + encodeURIComponent(currentQuote) + '&canonicalUrl=' + encodeURIComponent(window.location.href), 640, 600);
-  }
-});
-
-googleElement.addEventListener('click', function () {
-  if (!inIframe()) {
-    openURL('https://www.google.com/#q=' + encodeURIComponent(currentQuote), 1000, 800);
-  }
-});

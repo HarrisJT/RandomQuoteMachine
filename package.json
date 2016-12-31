@@ -23,9 +23,10 @@
   },
   "homepage": "https://github.com/HarrisJT/RandomQuoteMachine#readme",
   "devDependencies": {
+    "babel-preset-babili": "0.0.9",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^3.1.1",
-    "gulp-csscomb": "^3.0.8",
-    "gulp-mocha": "^3.0.1"
+    "gulp-babel": "^6.1.2",
+    "gulp-csscomb": "^3.0.8"
   }
 }

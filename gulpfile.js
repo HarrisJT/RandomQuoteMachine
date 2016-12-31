@@ -1,15 +1,15 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
-//const uglify = require('gulp-uglify');
+const babel = require('gulp-babel');
 const autoprefixer = require('gulp-autoprefixer');
 const csscomb = require('gulp-csscomb');
 const minify = require('gulp-minify-css');
 const imagemin = require('gulp-imagemin');
 
-
 gulp.task('js', function () {
   return gulp.src('_include/js/main.js')
-      .pipe(concat('main.min.js'))//.pipe(uglify())
+      .pipe(concat('main.min.js'))
+      .pipe(babel({presets: ['babili']}))
       .pipe(gulp.dest('_include/js'));
 });
 
@@ -27,7 +27,7 @@ gulp.task('css', function () {
 });
 
 gulp.task('img', function () {
-  return gulp.src('_include/img/**/*.{png,gif,jpg}')
+  return gulp.src('_include/img/*.{png,gif,jpg}')
       .pipe(imagemin())
       .pipe(gulp.dest('_include/img'));
 });
